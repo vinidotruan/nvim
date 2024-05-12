@@ -4,7 +4,7 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "phpactor"}
+local servers = { "html", "cssls", "phpactor", "gopls"}
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -25,3 +25,17 @@ lspconfig.phpactor.setup {
     ["language_server_psalm.enabled"] = true,
   }
 }
+
+lspconfig.gopls.setup {
+  on_attach = function(client, bufnr)
+    client.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+      vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = true,
+        signs = true,
+        underline = true,
+        update_in_insert = true,
+      }
+    )
+  end,
+}
+

@@ -36,4 +36,5 @@ require "nvchad.autocmds"
 
 vim.schedule(function()
   require "mappings"
+  vim.cmd('syntax on')
 end)
