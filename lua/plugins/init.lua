@@ -1,13 +1,10 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
     config = function()
       require "configs.conform"
     end,
   },
-
-  -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -15,4 +12,22 @@ return {
        require "configs.lspconfig"
     end,
   },
+  {
+    "wakatime/vim-wakatime", lazy=false
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+  }
+
+--{
+    -- "windwp/nvim-ts-autotag",
+    -- config = function()
+      -- require('nvim-ts-autotag').setup({
+        -- filetypes = {"html"}
+      -- })
+    -- end,
+  -- },
 }

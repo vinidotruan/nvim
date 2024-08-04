@@ -2,10 +2,10 @@
 local on_attach = require("nvchad.configs.lspconfig").on_attach
 local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
-
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "phpactor", "gopls"}
+local servers = { "html", "cssls", "phpactor", "gopls", "vls" }
 
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- lsps with default config
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -26,6 +26,7 @@ lspconfig.phpactor.setup {
   }
 }
 
+
 lspconfig.gopls.setup {
   on_attach = function(client, bufnr)
     client.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -38,4 +39,24 @@ lspconfig.gopls.setup {
     )
   end,
 }
+
+lspconfig.tsserver.setup {
+  on_attach = on_attach,
+  root_dir = lspconfig.util.root_pattern("package.json"),
+  single_file_support = false
+}
+
+lspconfig.emmet_ls.setup({
+    -- on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "php","css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
+    init_options = {
+      html = {
+        options = {
+          -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+          ["bem.enabled"] = true,
+        },
+      },
+    }
+})
 

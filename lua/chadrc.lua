@@ -12,4 +12,12 @@ M.ui = {
 	-- 	["@comment"] = { italic = true },
 	-- },
 }
+
+M.plugins = {
+   user = {
+      ["neoclide/coc.nvim"] = {
+         branch = "release",
+      }
+   },
+}
 return M

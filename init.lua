@@ -8,8 +8,10 @@ if not vim.loop.fs_stat(lazypath) then
   local repo = "https://github.com/folke/lazy.nvim.git"
   vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
 end
-
+vim.o.foldlevelstart = 100
 vim.opt.rtp:prepend(lazypath)
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 local lazy_config = require "configs.lazy"
 
