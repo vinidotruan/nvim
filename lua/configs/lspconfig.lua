@@ -26,21 +26,21 @@ lspconfig.phpactor.setup {
   }
 }
 
-lspconfig.gopls.setup {
-  on_attach = function(client, bufnr)
-    -- Call original on_attach
-    on_attach(client, bufnr)
-    -- Additional config for gopls
-    client.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-      vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = true,
-        signs = true,
-        underline = true,
-        update_in_insert = true,
-      }
-    )
-  end,
-}
+-- lspconfig.gopls.setup {
+--   on_attach = function(client, bufnr)
+--     -- Call original on_attach
+--     on_attach(client, bufnr)
+--     -- Additional config for gopls
+--     client.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--       vim.lsp.diagnostic.on_publish_diagnostics, {
+--         virtual_text = true,
+--         signs = true,
+--         underline = true,
+--         update_in_insert = true,
+--       }
+--     )
+--   end,
+-- }
 
 local vue_language_server_path = vim.fn.expand('~/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server')
 
